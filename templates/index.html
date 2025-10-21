@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility Demo - T Level PDD</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{{ 'fs-' + prefs.font_size.replace('px','') }}" data-theme="{{ prefs.theme }}">
+<div class="container">
+<h1>Accessible design demo</h1>
+<p class="lead">Select theme and font size. Preferences are saved for the demo user.</p>
+
+
+<form id="prefsForm" method="post" action="{{ url_for('save_prefs') }}">
+<input type="hidden" name="username" value="demo">
+
+
+<label for="font">Font size:</label>
+<select name="font_size" id="font">
+<option value="14px" {% if prefs.font_size=='14px' %}selected{% endif %}>Small (14px)</option>
+<option value="16px" {% if prefs.font_size=='16px' %}selected{% endif %}>Default (16px)</option>
+<option value="18px" {% if prefs.font_size=='18px' %}selected{% endif %}>Large (18px)</option>
+<option value="20px" {% if prefs.font_size=='20px' %}selected{% endif %}>Extra Large (20px)</option>
+</select>
+
+
+<label for="theme">Theme:</label>
+<select name="theme" id="theme">
+<option value="light" {% if prefs.theme=='light' %}selected{% endif %}>Light</option>
+<option value="dark" {% if prefs.theme=='dark' %}selected{% endif %}>Dark</option>
+<option value="high-contrast" {% if prefs.theme=='high-contrast' %}selected{% endif %}>High contrast</option>
+</select>
+
+
+<label for="fontfamily">Font family:</label>
+<select name="base_font" id="fontfamily">
+<option value="Inter, Arial, sans-serif" {% if 'Inter' in prefs.base_font %}selected{% endif %}>System Sans</option>
+<option value="Georgia, 'Times New Roman', serif" {% if 'Georgia' in prefs.base_font %}selected{% endif %}>Serif</option>
+</select>
+
+
+<button type="submit">Save</button>
+</form>
+
+
+<div class="card">
+<h2>Demo content</h2>
+<p>This paragraph demonstrates your selected font and color theme.</p>
+<p>Example link: <a href="#">Learn more</a>.</p>
+</div>
+</div>
+</body>
+</html>
